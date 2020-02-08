@@ -37,6 +37,9 @@ const benefits = {
   },
   travelCredit: {
     question: "Travel Credit (CSR, does not earn points)"
+  },
+  annualFee: {
+    question: "Annual Fee"
   }
 };
 
@@ -205,7 +208,8 @@ let valuesCSR = {
   travelSpend: 0,
   diningSpend: 0,
   nonBonusSpend: 0,
-  loungeSpend: 0
+  loungeSpend: 0,
+  annualFee: 0
 };
 
 function calculateCSR({
@@ -224,6 +228,7 @@ function calculateCSR({
   valuesCSR.diningSpend = diningSpend * CSR.diningMultiplier;
   valuesCSR.nonBonusSpend = Math.round(nonBonusSpend * 0.01);
   valuesCSR.loungeSpend = loungeSpend;
+  valuesCSR.annualFee = -CSR.annualFee;
 
   return Object.values(valuesCSR).reduce((a, b) => a + b, 0);
 }
@@ -234,7 +239,8 @@ let valuesCSP = {
   travelSpend: 0,
   diningSpend: 0,
   nonBonusSpend: 0,
-  loungeSpend: 0
+  loungeSpend: 0,
+  annualFee: 0
 };
 
 function calculateCSP({
@@ -248,6 +254,7 @@ function calculateCSP({
   valuesCSP.travelSpend = travelSpend * CSP.travelMultiplier;
   valuesCSP.diningSpend = diningSpend * CSP.diningMultiplier;
   valuesCSP.nonBonusSpend = Math.round(nonBonusSpend * 0.01);
+  valuesCSP.annualFee = -CSP.annualFee;
 
   let sum = 0;
 
