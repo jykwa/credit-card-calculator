@@ -144,7 +144,7 @@ const Basic = () => {
                 Submit
               </button>
             </form>
-            <div>This is the value: {JSON.stringify(values)}</div>
+            <div>These are the inputted values: {JSON.stringify(values)}</div>
             <div>{getAnswer(values)}</div>
           </>
         )}
@@ -153,14 +153,16 @@ const Basic = () => {
   );
 };
 const CSR = {
+  signupBonus: 500,
+  travelCredit: 300,
   travelMultiplier: 0.03,
   diningMultiplier: 0.03,
   annualFee: 450,
-  portalMultiplier: 1.5,
-  travelCredit: 300
+  portalMultiplier: 1.5
 };
 
 const CSP = {
+  signupBonus: 600,
   travelMultiplier: 0.02,
   diningMultiplier: 0.02,
   annualFee: 95,
@@ -176,7 +178,7 @@ function getAnswer(values) {
   // } else {
   //   return `CSP will give you an expected value of ${valueCSP}`;
   // }
-  return `CSR will give you an expected value of ${valueCSR} and CSP will give you an expected value of ${valueCSP}`;
+  return `In the first year, CSR will give you an expected value of ${valueCSR} and CSP will give you an expected value of ${valueCSP}`;
 }
 
 function calculateCSR({
@@ -187,6 +189,7 @@ function calculateCSR({
 }) {
   let expectedValue = 0;
 
+  expectedValue += CSR.signupBonus;
   let travelCredit = Math.min(travelSpend, CSR.travelCredit);
   expectedValue += travelCredit;
 
@@ -205,6 +208,7 @@ function calculateCSP({
   loungeSpend = 0
 }) {
   let expectedValue = 0;
+  expectedValue += CSP.signupBonus;
 
   expectedValue += travelSpend * CSP.travelMultiplier;
   expectedValue += diningSpend * CSP.diningMultiplier;
