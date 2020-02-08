@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Formik } from "formik";
+import benefitsSummary from "./components/BenefitsSummary.js";
 
 function App() {
   return (
@@ -12,6 +13,32 @@ function App() {
     </div>
   );
 }
+
+const benefits = {
+  travelSpend: {
+    question: "How much do you spend on travel each year?",
+    error: "Invalid travel spend amount"
+  },
+  diningSpend: {
+    question: "How much do you spend on dining each year?",
+    error: "Invalid dining spend amount"
+  },
+  nonBonusSpend: {
+    question: "How much do you spend on non-bonus categories each year?",
+    error: "Invalid non-bonus spend amount"
+  },
+  loungeSpend: {
+    question:
+      "How much do you value for Priority Pass lounge access for you + 2 guests?",
+    error: "Invalid lounge spend amount"
+  },
+  signupBonus: {
+    question: "Signup Bonus amount"
+  },
+  travelCredit: {
+    question: "Travel Credit (CSR, does not earn points)"
+  }
+};
 
 const Basic = () => {
   return (
@@ -28,25 +55,25 @@ const Basic = () => {
           if (!values.travelSpend) {
             errors.travelSpend = "Required";
           } else if (values.travelSpend < 0) {
-            errors.travelSpend = "Invalid travel spend amount";
+            errors.travelSpend = benefits.travelSpend.error;
           }
 
           if (!values.diningSpend) {
             errors.diningSpend = "Required";
           } else if (values.diningSpend < 0) {
-            errors.diningSpend = "Invalid dining spend amount";
+            errors.diningSpend = benefits.diningSpend.error;
           }
 
           if (!values.nonBonusSpend) {
             errors.nonBonusSpend = "Required";
           } else if (values.nonBonusSpend < 0) {
-            errors.nonBonusSpend = "Invalid non-bonus spend amount";
+            errors.nonBonusSpend = benefits.nonBonusSpend.error;
           }
 
           if (!values.loungeSpend) {
             errors.loungeSpend = "Required";
           } else if (values.loungeSpend < 0) {
-            errors.loungeSpend = "Invalid lounge spend amount";
+            errors.loungeSpend = benefits.loungeSpend.error;
           }
 
           return errors;
@@ -74,7 +101,7 @@ const Basic = () => {
               onSubmit={handleSubmit}
             >
               <div>
-                <label>How much do you spend on travel each year?</label>
+                <label>{benefits.travelSpend.question}</label>
                 <input
                   type="number"
                   name="travelSpend"
@@ -88,7 +115,7 @@ const Basic = () => {
               </div>
 
               <div>
-                <label>How much do you spend on dining each year?</label>
+                <label>{benefits.diningSpend.question}</label>
                 <input
                   type="number"
                   name="diningSpend"
@@ -102,9 +129,7 @@ const Basic = () => {
               </div>
 
               <div>
-                <label>
-                  How much do you spend on non-bonus categories each year?
-                </label>
+                <label>{benefits.nonBonusSpend.question}</label>
                 <input
                   type="number"
                   name="nonBonusSpend"
@@ -117,10 +142,7 @@ const Basic = () => {
                   errors.nonBonusSpend}
               </div>
               <div>
-                <label>
-                  How much do you value for Priority Pass lounge access for you
-                  + 2 guests?
-                </label>
+                <label>{benefits.loungeSpend.question}</label>
                 <input
                   type="number"
                   name="loungeSpend"
@@ -146,6 +168,7 @@ const Basic = () => {
             </form>
             <div>These are the inputted values: {JSON.stringify(values)}</div>
             <div>{getAnswer(values)}</div>
+            <div>{benefitsSummary(benefits, valuesCSR, valuesCSP)}</div>
           </>
         )}
       </Formik>
@@ -157,7 +180,7 @@ const CSR = {
   travelCredit: 300,
   travelMultiplier: 0.03,
   diningMultiplier: 0.03,
-  annualFee: 450,
+  annualFee: 550,
   portalMultiplier: 1.5
 };
 
@@ -181,25 +204,43 @@ function getAnswer(values) {
   return `In the first year, CSR will give you an expected value of ${valueCSR} and CSP will give you an expected value of ${valueCSP}`;
 }
 
+let valuesCSR = {
+  signupBonus: 0,
+  travelCredit: 0,
+  travelSpend: 0,
+  diningSpend: 0,
+  nonBonusSpend: 0,
+  loungeSpend: 0
+};
+
 function calculateCSR({
   travelSpend,
   diningSpend,
   nonBonusSpend,
   loungeSpend
 }) {
-  let expectedValue = 0;
+  valuesCSR.signupBonus = CSR.signupBonus;
 
-  expectedValue += CSR.signupBonus;
-  let travelCredit = Math.min(travelSpend, CSR.travelCredit);
-  expectedValue += travelCredit;
+  valuesCSR.travelCredit = Math.min(travelSpend, CSR.travelCredit);
 
-  expectedValue += (travelSpend - travelCredit) * CSR.travelMultiplier;
-  expectedValue += diningSpend * CSR.diningMultiplier;
-  expectedValue += Math.round(nonBonusSpend * 0.01);
-  expectedValue += loungeSpend;
+  valuesCSR.travelSpend =
+    (travelSpend - Math.min(travelSpend, CSR.travelCredit)) *
+    CSR.travelMultiplier;
+  valuesCSR.diningSpend = diningSpend * CSR.diningMultiplier;
+  valuesCSR.nonBonusSpend = Math.round(nonBonusSpend * 0.01);
+  valuesCSR.loungeSpend = loungeSpend;
 
-  return expectedValue;
+  return Object.values(valuesCSR).reduce((a, b) => a + b, 0);
 }
+
+let valuesCSP = {
+  signupBonus: 0,
+  travelCredit: 0,
+  travelSpend: 0,
+  diningSpend: 0,
+  nonBonusSpend: 0,
+  loungeSpend: 0
+};
 
 function calculateCSP({
   travelSpend,
@@ -207,14 +248,18 @@ function calculateCSP({
   nonBonusSpend,
   loungeSpend = 0
 }) {
-  let expectedValue = 0;
-  expectedValue += CSP.signupBonus;
+  valuesCSP.signupBonus = CSP.signupBonus;
 
-  expectedValue += travelSpend * CSP.travelMultiplier;
-  expectedValue += diningSpend * CSP.diningMultiplier;
-  expectedValue += Math.round(nonBonusSpend * 0.01);
+  valuesCSP.travelSpend = travelSpend * CSP.travelMultiplier;
+  valuesCSP.diningSpend = diningSpend * CSP.diningMultiplier;
+  valuesCSP.nonBonusSpend = Math.round(nonBonusSpend * 0.01);
 
-  return expectedValue;
+  let sum = 0;
+
+  for (let values in valuesCSP.values) {
+    sum += values;
+  }
+  return sum;
 }
 
 export default App;
