@@ -196,11 +196,6 @@ function getAnswer(values) {
   let valueCSR = calculateCSR(values) - CSR.annualFee;
   let valueCSP = calculateCSP(values) - CSP.annualFee;
 
-  // if (valueCSR > valueCSP) {
-  //   return `CSR will give you an expected value of ${valueCSR}`;
-  // } else {
-  //   return `CSP will give you an expected value of ${valueCSP}`;
-  // }
   return `In the first year, CSR will give you an expected value of ${valueCSR} and CSP will give you an expected value of ${valueCSP}`;
 }
 
