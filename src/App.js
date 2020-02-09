@@ -256,12 +256,7 @@ function calculateCSP({
   valuesCSP.nonBonusSpend = Math.round(nonBonusSpend * 0.01);
   valuesCSP.annualFee = -CSP.annualFee;
 
-  let sum = 0;
-
-  for (let values in valuesCSP.values) {
-    sum += values;
-  }
-  return sum;
+  return Object.values(valuesCSP).reduce((a, b) => a + b, 0);
 }
 
 export default App;
