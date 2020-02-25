@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { Formik } from "formik";
 import benefitsSummary from "./components/BenefitsSummary.js";
+import MileageCredit from "./components/MileageCredit.js";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <div>
         Chase Sapphire Reserve vs. Chase Sapphire Preferred Calculator
         <Basic />
+        <MileageCredit></MileageCredit>
       </div>
     </div>
   );
