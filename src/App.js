@@ -3,12 +3,13 @@ import "./App.css";
 import { Formik } from "formik";
 import benefitsSummary from "./components/BenefitsSummary.js";
 import MileageCredit from "./components/MileageCredit.js";
-
 function App() {
   return (
     <div className="App">
+      <header>
+        Chase Sapphire Reserve vs. Chase Sapphire Preferred Calculator{" "}
+      </header>
       <div>
-        Chase Sapphire Reserve vs. Chase Sapphire Preferred Calculator
         <Basic />
         <MileageCredit></MileageCredit>
       </div>
@@ -30,15 +31,14 @@ const benefits = {
     error: "Invalid non-bonus spend amount"
   },
   loungeSpend: {
-    question:
-      "How much do you value for Priority Pass lounge access for you + 2 guests?",
+    question: "How much do you value Priority Pass lounges for you + 2 guests?",
     error: "Invalid lounge spend amount"
   },
   signupBonus: {
     question: "Signup Bonus amount"
   },
   travelCredit: {
-    question: "Travel Credit (CSR, does not earn points)"
+    question: "Travel Credit $300 (CSR, does not earn points)"
   },
   annualFee: {
     question: "Annual Fee"
@@ -47,7 +47,7 @@ const benefits = {
 
 const Basic = () => {
   return (
-    <div>
+    <div className="calculator">
       <Formik
         initialValues={{
           travelSpend: 0,
@@ -167,11 +167,15 @@ const Basic = () => {
                 slider?
                 referral links? might need to add disclaimer or something
               */}
-              <button type="submit" disabled={isSubmitting}>
+              <button
+                className="btn btn-primary"
+                type="submit"
+                disabled={isSubmitting}
+              >
                 Submit
               </button>
             </form>
-            <div>These are the inputted values: {JSON.stringify(values)}</div>
+            {/* <div>These are the inputted values: {JSON.stringify(values)}</div> */}
             <div>{getAnswer(values)}</div>
             <div>{benefitsSummary(benefits, valuesCSR, valuesCSP)}</div>
           </>
@@ -201,7 +205,7 @@ function getAnswer(values) {
   let valueCSR = calculateCSR(values);
   let valueCSP = calculateCSP(values);
 
-  return `In the first year, CSR will give you an expected value of ${valueCSR} and CSP will give you an expected value of ${valueCSP}`;
+  // return `In the first year, CSR will give you an expected value of ${valueCSR} and CSP will give you an expected value of ${valueCSP}`;
 }
 
 let valuesCSR = {

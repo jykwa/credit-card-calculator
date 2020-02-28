@@ -4,12 +4,12 @@ import Table from "react-bootstrap/Table";
 function benefitsSummary(benefits, valuesCSR, valuesCSP) {
   return (
     <div>
-      <Table>
+      <Table className="table table-striped table-bordered">
         <thead>
           <tr>
             <th>Question</th>
-            <th>Chase Sapphire Reserve Expected Value</th>
-            <th>Chase Sapphire Preferred Expected Value</th>
+            <th>CSR Expected Value</th>
+            <th>CSP Expected Value</th>
           </tr>
         </thead>
         <tbody>

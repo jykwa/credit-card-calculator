@@ -48,7 +48,7 @@ function MileageCredit() {
   function parseData(data) {
     return data.map((obj, index) => (
       <div>
-        {JSON.stringify(obj.value.totals)}
+        {/* {JSON.stringify(obj.value.totals)} */}
 
         {obj.value.totals.map(({ id, name, rdm }) => (
           <p key={index}>
