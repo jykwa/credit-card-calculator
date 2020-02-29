@@ -101,65 +101,64 @@ const Basic = () => {
           /* and other goodies */
         }) => (
           <>
-            <form
-              className="d-flex flex-column container"
-              onSubmit={handleSubmit}
-            >
-              <div>
-                <label>{benefits.travelSpend.question}</label>
-                <input
-                  type="number"
-                  name="travelSpend"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.travelSpend}
-                />
-                {errors.travelSpend &&
-                  touched.travelSpend &&
-                  errors.travelSpend}
-              </div>
+            <div className="row">
+              <div className="col-sm">
+                <form className="d-flex flex-column" onSubmit={handleSubmit}>
+                  <div>
+                    <label>{benefits.travelSpend.question}</label>
+                    <input
+                      type="number"
+                      name="travelSpend"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.travelSpend}
+                    />
+                    {errors.travelSpend &&
+                      touched.travelSpend &&
+                      errors.travelSpend}
+                  </div>
 
-              <div>
-                <label>{benefits.diningSpend.question}</label>
-                <input
-                  type="number"
-                  name="diningSpend"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.diningSpend}
-                />
-                {errors.diningSpend &&
-                  touched.diningSpend &&
-                  errors.diningSpend}
-              </div>
+                  <div>
+                    <label>{benefits.diningSpend.question}</label>
+                    <input
+                      type="number"
+                      name="diningSpend"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.diningSpend}
+                    />
+                    {errors.diningSpend &&
+                      touched.diningSpend &&
+                      errors.diningSpend}
+                  </div>
 
-              <div>
-                <label>{benefits.nonBonusSpend.question}</label>
-                <input
-                  type="number"
-                  name="nonBonusSpend"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.nonBonusSpend}
-                />
-                {errors.nonBonusSpend &&
-                  touched.nonBonusSpend &&
-                  errors.nonBonusSpend}
-              </div>
-              <div>
-                <label>{benefits.loungeSpend.question}</label>
-                <input
-                  type="number"
-                  name="loungeSpend"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.loungeSpend}
-                />
-                {errors.loungeSpend &&
-                  touched.loungeSpend &&
-                  errors.loungeSpend}
-              </div>
-              {/*
+                  <div>
+                    <label>{benefits.nonBonusSpend.question}</label>
+                    <input
+                      type="number"
+                      name="nonBonusSpend"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.nonBonusSpend}
+                    />
+                    {errors.nonBonusSpend &&
+                      touched.nonBonusSpend &&
+                      errors.nonBonusSpend}
+                  </div>
+                  <div>
+                    <label>{benefits.loungeSpend.question}</label>
+                    <input
+                      type="number"
+                      name="loungeSpend"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.loungeSpend}
+                    />
+                    {errors.loungeSpend &&
+                      touched.loungeSpend &&
+                      errors.loungeSpend}
+                  </div>
+                  {/*
               prereqs: 5/24, good credit history, no debt, etc. 
               
                 sign up bonus, GE, trip delay/baggage insurance, roadside assistance
@@ -167,18 +166,24 @@ const Basic = () => {
                 slider?
                 referral links? might need to add disclaimer or something
               */}
-              <button
-                className="btn btn-primary"
-                type="submit"
-                disabled={isSubmitting}
-              >
-                Submit
-              </button>
-              <br />
-              <h4>{getAnswer(values)}</h4>
-            </form>
-            {/* <div>These are the inputted values: {JSON.stringify(values)}</div> */}
-            <div>{benefitsSummary(benefits, valuesCSR, valuesCSP)}</div>
+                  <button
+                    className="btn btn-primary"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    Submit
+                  </button>
+                  <br />
+                  <h4>{getAnswer(values)}</h4>
+                </form>
+              </div>
+
+              {/* <div>These are the inputted values: {JSON.stringify(values)}</div> */}
+
+              <div className="col-sm">
+                <div>{benefitsSummary(benefits, valuesCSR, valuesCSP)}</div>
+              </div>
+            </div>
           </>
         )}
       </Formik>

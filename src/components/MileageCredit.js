@@ -83,118 +83,120 @@ function MileageCredit() {
 
   return (
     <div>
-      <h3>Find out how many miles you can earn on a revenue fare!</h3>
-      <Formik
-        initialValues={{
-          origin: "",
-          destination: "",
-          carrier: "",
-          fareClass: ""
-        }}
-        validate={values => {
-          const errors = {};
-          //   if (!values.travelSpend) {
-          //     errors.travelSpend = "Required";
-          //   } else if (values.travelSpend < 0) {
-          //     errors.travelSpend = benefits.travelSpend.error;
-          //   }
+      <div className="row">
+        <div className="col-sm">
+          <h3>Find out how many miles you can earn on a revenue fare!</h3>
+          <Formik
+            initialValues={{
+              origin: "",
+              destination: "",
+              carrier: "",
+              fareClass: ""
+            }}
+            validate={values => {
+              const errors = {};
+              //   if (!values.travelSpend) {
+              //     errors.travelSpend = "Required";
+              //   } else if (values.travelSpend < 0) {
+              //     errors.travelSpend = benefits.travelSpend.error;
+              //   }
 
-          //   if (!values.diningSpend) {
-          //     errors.diningSpend = "Required";
-          //   } else if (values.diningSpend < 0) {
-          //     errors.diningSpend = benefits.diningSpend.error;
-          //   }
+              //   if (!values.diningSpend) {
+              //     errors.diningSpend = "Required";
+              //   } else if (values.diningSpend < 0) {
+              //     errors.diningSpend = benefits.diningSpend.error;
+              //   }
 
-          //   if (!values.nonBonusSpend) {
-          //     errors.nonBonusSpend = "Required";
-          //   } else if (values.nonBonusSpend < 0) {
-          //     errors.nonBonusSpend = benefits.nonBonusSpend.error;
-          //   }
+              //   if (!values.nonBonusSpend) {
+              //     errors.nonBonusSpend = "Required";
+              //   } else if (values.nonBonusSpend < 0) {
+              //     errors.nonBonusSpend = benefits.nonBonusSpend.error;
+              //   }
 
-          //   if (!values.loungeSpend) {
-          //     errors.loungeSpend = "Required";
-          //   } else if (values.loungeSpend < 0) {
-          //     errors.loungeSpend = benefits.loungeSpend.error;
-          //   }
+              //   if (!values.loungeSpend) {
+              //     errors.loungeSpend = "Required";
+              //   } else if (values.loungeSpend < 0) {
+              //     errors.loungeSpend = benefits.loungeSpend.error;
+              //   }
 
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            updateRequestBody(values);
+              return errors;
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                alert(JSON.stringify(values, null, 2));
+                updateRequestBody(values);
 
-            setSubmitting(false);
-          }, 400);
-        }}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting
-          /* and other goodies */
-        }) => (
-          <>
-            <form className="d-flex flex-column" onSubmit={handleSubmit}>
-              <div>
-                <label>Origin</label>
-                <input
-                  type="text"
-                  name="origin"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.origin}
-                />
-                {errors.travelSpend &&
-                  touched.travelSpend &&
-                  errors.travelSpend}
-              </div>
+                setSubmitting(false);
+              }, 400);
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting
+              /* and other goodies */
+            }) => (
+              <>
+                <form className="d-flex flex-column" onSubmit={handleSubmit}>
+                  <div>
+                    <label>Origin</label>
+                    <input
+                      type="text"
+                      name="origin"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.origin}
+                    />
+                    {errors.travelSpend &&
+                      touched.travelSpend &&
+                      errors.travelSpend}
+                  </div>
 
-              <div>
-                <label>Destination</label>
-                <input
-                  type="text"
-                  name="destination"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.destination}
-                />
-                {errors.diningSpend &&
-                  touched.diningSpend &&
-                  errors.diningSpend}
-              </div>
+                  <div>
+                    <label>Destination</label>
+                    <input
+                      type="text"
+                      name="destination"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.destination}
+                    />
+                    {errors.diningSpend &&
+                      touched.diningSpend &&
+                      errors.diningSpend}
+                  </div>
 
-              <div>
-                <label>Carrier</label>
-                <input
-                  type="text"
-                  name="carrier"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.carrier}
-                />
-                {errors.nonBonusSpend &&
-                  touched.nonBonusSpend &&
-                  errors.nonBonusSpend}
-              </div>
-              <div>
-                <label>Fare Class</label>
-                <input
-                  type="text"
-                  name="fareClass"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.fareClass}
-                />
-                {errors.loungeSpend &&
-                  touched.loungeSpend &&
-                  errors.loungeSpend}
-              </div>
-              {/*
+                  <div>
+                    <label>Carrier</label>
+                    <input
+                      type="text"
+                      name="carrier"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.carrier}
+                    />
+                    {errors.nonBonusSpend &&
+                      touched.nonBonusSpend &&
+                      errors.nonBonusSpend}
+                  </div>
+                  <div>
+                    <label>Fare Class</label>
+                    <input
+                      type="text"
+                      name="fareClass"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.fareClass}
+                    />
+                    {errors.loungeSpend &&
+                      touched.loungeSpend &&
+                      errors.loungeSpend}
+                  </div>
+                  {/*
               prereqs: 5/24, good credit history, no debt, etc. 
               
                 sign up bonus, GE, trip delay/baggage insurance, roadside assistance
@@ -202,21 +204,27 @@ function MileageCredit() {
                 slider?
                 referral links? might need to add disclaimer or something
               */}
-              <button
-                className="btn btn-primary"
-                type="submit"
-                disabled={isSubmitting}
-              >
-                Submit
-              </button>
-            </form>
-            {/* <div>These are the inputted values: {JSON.stringify(values)}</div> */}
-          </>
-        )}
-      </Formik>
-      <button onClick={callAPI}>Call the API</button>
-      <div>{parseData(data)}</div>
-      <p>data should be above here (Data provided by wheretocredit.com)</p>
+                  <button
+                    className="btn btn-primary btn-block"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    Submit
+                  </button>
+                </form>
+                {/* <div>These are the inputted values: {JSON.stringify(values)}</div> */}
+              </>
+            )}
+          </Formik>
+
+          <button onClick={callAPI}>Call the API</button>
+          <p> (Data provided by wheretocredit.com)</p>
+        </div>
+
+        <div className="col-sm">
+          <div>{parseData(data)}</div>
+        </div>
+      </div>
     </div>
   );
 }
