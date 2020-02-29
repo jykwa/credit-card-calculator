@@ -174,9 +174,10 @@ const Basic = () => {
               >
                 Submit
               </button>
+              <br />
+              <h4>{getAnswer(values)}</h4>
             </form>
             {/* <div>These are the inputted values: {JSON.stringify(values)}</div> */}
-            <div>{getAnswer(values)}</div>
             <div>{benefitsSummary(benefits, valuesCSR, valuesCSP)}</div>
           </>
         )}
@@ -205,7 +206,7 @@ function getAnswer(values) {
   let valueCSR = calculateCSR(values);
   let valueCSP = calculateCSP(values);
 
-  // return `In the first year, CSR will give you an expected value of ${valueCSR} and CSP will give you an expected value of ${valueCSP}`;
+  return `In the first year, CSR will give you an expected value of ${valueCSR} and CSP will give you an expected value of ${valueCSP}`;
 }
 
 let valuesCSR = {
