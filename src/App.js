@@ -85,7 +85,10 @@ const Basic = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            // alert(JSON.stringify(values, null, 2));
+
+            // getAnswer(values);
+
             setSubmitting(false);
           }, 400);
         }}
@@ -166,22 +169,24 @@ const Basic = () => {
                 slider?
                 referral links? might need to add disclaimer or something
               */}
-                  <button
+                  {/* <button
                     className="btn btn-primary"
                     type="submit"
                     disabled={isSubmitting}
                   >
                     Submit
-                  </button>
+                  </button> */}
                   <br />
-                  <h4>{getAnswer(values)}</h4>
+                  {/* <h4>{getAnswer(values)}</h4> */}
                 </form>
               </div>
 
               {/* <div>These are the inputted values: {JSON.stringify(values)}</div> */}
 
               <div className="col-sm">
-                <div>{benefitsSummary(benefits, valuesCSR, valuesCSP)}</div>
+                <div>
+                  {benefitsSummary(benefits, valuesCSR, valuesCSP, values)}
+                </div>
               </div>
             </div>
           </>
@@ -224,7 +229,7 @@ let valuesCSR = {
   annualFee: 0
 };
 
-function calculateCSR({
+export function calculateCSR({
   travelSpend,
   diningSpend,
   nonBonusSpend,
@@ -255,7 +260,7 @@ let valuesCSP = {
   annualFee: 0
 };
 
-function calculateCSP({
+export function calculateCSP({
   travelSpend,
   diningSpend,
   nonBonusSpend,

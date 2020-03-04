@@ -123,9 +123,9 @@ function MileageCredit() {
             }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
+                // alert(JSON.stringify(values, null, 2));
                 updateRequestBody(values);
-
+                callAPI();
                 setSubmitting(false);
               }, 400);
             }}
@@ -143,7 +143,7 @@ function MileageCredit() {
               <>
                 <form className="d-flex flex-column" onSubmit={handleSubmit}>
                   <div>
-                    <label>Origin</label>
+                    <label>Origin (e.g. SF0)</label>
                     <input
                       type="text"
                       name="origin"
@@ -157,7 +157,7 @@ function MileageCredit() {
                   </div>
 
                   <div>
-                    <label>Destination</label>
+                    <label>Destination (e.g. LAX)</label>
                     <input
                       type="text"
                       name="destination"
@@ -171,7 +171,7 @@ function MileageCredit() {
                   </div>
 
                   <div>
-                    <label>Carrier</label>
+                    <label>Carrier (e.g. UA, DL, AA)</label>
                     <input
                       type="text"
                       name="carrier"
@@ -184,7 +184,7 @@ function MileageCredit() {
                       errors.nonBonusSpend}
                   </div>
                   <div>
-                    <label>Fare Class</label>
+                    <label>Fare Class (e.g. F, J, Y)</label>
                     <input
                       type="text"
                       name="fareClass"
@@ -217,7 +217,7 @@ function MileageCredit() {
             )}
           </Formik>
 
-          <button onClick={callAPI}>Call the API</button>
+          {/* <button onClick={callAPI}>Call the API</button> */}
           <p> (Data provided by wheretocredit.com)</p>
         </div>
 
