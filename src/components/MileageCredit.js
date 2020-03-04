@@ -55,7 +55,10 @@ function MileageCredit() {
             <tr>
               <th>Airline Code</th>
               <th>Airline</th>
-              <th>Redeemable Miles Earned</th>
+              <th>
+                Redeemable Miles Earned <br />
+                (Silver Gold Platinum etc.)
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -143,7 +146,7 @@ function MileageCredit() {
               <>
                 <form className="d-flex flex-column" onSubmit={handleSubmit}>
                   <div>
-                    <label>Origin (e.g. SF0)</label>
+                    <label>Origin (e.g. SFO)</label>
                     <input
                       type="text"
                       name="origin"
