@@ -57,7 +57,7 @@ function MileageCredit() {
               <th>Airline</th>
               <th>
                 Redeemable Miles Earned <br />
-                (Silver Gold Platinum etc.)
+                (Member, Silver, Gold, Platinum, etc.)
               </th>
             </tr>
           </thead>

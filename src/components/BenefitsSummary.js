@@ -26,7 +26,7 @@ function benefitsSummary(benefits, valuesCSR, valuesCSP, values) {
           ))}
           <tr>
             <td>
-              <b>Total Expected Value</b>
+              <b>First Year Total Expected Value</b>
             </td>
             <td>{Math.round(valueCSR)}</td>
             <td>{Math.round(valueCSP)}</td>
