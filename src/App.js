@@ -9,7 +9,7 @@ function App() {
       <header>
         Chase Sapphire Reserve vs. Chase Sapphire Preferred Calculator{" "}
       </header>
-      <div>
+      <div className="edges">
         <Basic />
         <MileageCredit></MileageCredit>
       </div>

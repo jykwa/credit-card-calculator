@@ -3,11 +3,6 @@ header {
   font-size: 3em;
 }
 
-.calculator {
-  display: flex;
-  flex-direction: row;
-}
-
 .btn {
   max-width: 20%;
   align-items: center;
@@ -19,4 +14,8 @@ header {
 
 input {
   margin-left: 5px !important;
+}
+
+.edges {
+  margin: 10px;
 }
