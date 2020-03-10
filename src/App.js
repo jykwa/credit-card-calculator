@@ -3,6 +3,8 @@ import "./App.css";
 import { Formik } from "formik";
 import benefitsSummary from "./components/BenefitsSummary.js";
 import MileageCredit from "./components/MileageCredit.js";
+import { benefits, CSR, CSP } from "./constants.js";
+
 function App() {
   return (
     <div className="App">
@@ -17,34 +19,6 @@ function App() {
   );
 }
 
-const benefits = {
-  travelSpend: {
-    question: "How much do you spend on travel each year?",
-    error: "Invalid travel spend amount"
-  },
-  diningSpend: {
-    question: "How much do you spend on dining each year?",
-    error: "Invalid dining spend amount"
-  },
-  nonBonusSpend: {
-    question: "How much do you spend on non-bonus categories each year?",
-    error: "Invalid non-bonus spend amount"
-  },
-  loungeSpend: {
-    question: "How much do you value Priority Pass lounges for you + 2 guests?",
-    error: "Invalid lounge spend amount"
-  },
-  signupBonus: {
-    question: "Signup Bonus amount"
-  },
-  travelCredit: {
-    question: "Travel Credit $300 (CSR, does not earn points)"
-  },
-  annualFee: {
-    question: "Annual Fee"
-  }
-};
-
 const Basic = () => {
   return (
     <Formik
@@ -52,32 +26,46 @@ const Basic = () => {
         travelSpend: 0,
         diningSpend: 0,
         nonBonusSpend: 0,
-        loungeSpend: 0
+        loungeSpend: 0,
+        GE_TSA: 0,
+        doordashSpend: 0
       }}
       validate={values => {
         const errors = {};
-        if (!values.travelSpend) {
+        if (values.travelSpend === "") {
           errors.travelSpend = "Required";
         } else if (values.travelSpend < 0) {
           errors.travelSpend = benefits.travelSpend.error;
         }
 
-        if (!values.diningSpend) {
+        if (values.diningSpend === "") {
           errors.diningSpend = "Required";
         } else if (values.diningSpend < 0) {
           errors.diningSpend = benefits.diningSpend.error;
         }
 
-        if (!values.nonBonusSpend) {
+        if (values.nonBonusSpend === "") {
           errors.nonBonusSpend = "Required";
         } else if (values.nonBonusSpend < 0) {
           errors.nonBonusSpend = benefits.nonBonusSpend.error;
         }
 
-        if (!values.loungeSpend) {
+        if (values.loungeSpend === "") {
           errors.loungeSpend = "Required";
         } else if (values.loungeSpend < 0) {
           errors.loungeSpend = benefits.loungeSpend.error;
+        }
+
+        if (values.GE_TSA === "") {
+          errors.GE_TSA = "Required";
+        } else if (values.GE_TSA < 0) {
+          errors.GE_TSA = benefits.GE_TSA.error;
+        }
+
+        if (values.doordashSpend === "") {
+          errors.doordashSpend = "Required";
+        } else if (values.doordashSpend < 0) {
+          errors.doordashSpend = benefits.doordashSpend.error;
         }
 
         return errors;
@@ -160,6 +148,32 @@ const Basic = () => {
                     touched.loungeSpend &&
                     errors.loungeSpend}
                 </div>
+
+                <div>
+                  <label>{benefits.GE_TSA.question}</label>
+                  <input
+                    type="number"
+                    name="GE_TSA"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.GE_TSA}
+                  />
+                  {errors.GE_TSA && touched.GE_TSA && errors.GE_TSA}
+                </div>
+
+                <div>
+                  <label>{benefits.doordashSpend.question}</label>
+                  <input
+                    type="number"
+                    name="doordashSpend"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.doordashSpend}
+                  />
+                  {errors.doordashSpend &&
+                    touched.doordashSpend &&
+                    errors.doordashSpend}
+                </div>
                 {/*
               prereqs: 5/24, good credit history, no debt, etc. 
               
@@ -193,22 +207,6 @@ const Basic = () => {
     </Formik>
   );
 };
-const CSR = {
-  signupBonus: 500,
-  travelCredit: 300,
-  travelMultiplier: 0.03,
-  diningMultiplier: 0.03,
-  annualFee: 550,
-  portalMultiplier: 1.5
-};
-
-const CSP = {
-  signupBonus: 600,
-  travelMultiplier: 0.02,
-  diningMultiplier: 0.02,
-  annualFee: 95,
-  portalMultiplier: 1.25
-};
 
 function getAnswer(values) {
   let valueCSR = calculateCSR(values);
@@ -224,6 +222,8 @@ let valuesCSR = {
   diningSpend: 0,
   nonBonusSpend: 0,
   loungeSpend: 0,
+  GE_TSA: 0,
+  doordashSpend: 0,
   annualFee: 0
 };
 
@@ -231,7 +231,9 @@ export function calculateCSR({
   travelSpend,
   diningSpend,
   nonBonusSpend,
-  loungeSpend
+  loungeSpend,
+  GE_TSA,
+  doordashSpend
 }) {
   valuesCSR.signupBonus = CSR.signupBonus;
 
@@ -242,7 +244,9 @@ export function calculateCSR({
     CSR.travelMultiplier;
   valuesCSR.diningSpend = diningSpend * CSR.diningMultiplier;
   valuesCSR.nonBonusSpend = Math.round(nonBonusSpend * 0.01);
-  valuesCSR.loungeSpend = loungeSpend;
+  valuesCSR.loungeSpend = loungeSpend || 0;
+  valuesCSR.GE_TSA = GE_TSA || 0;
+  valuesCSR.doordashSpend = doordashSpend || 0;
   valuesCSR.annualFee = -CSR.annualFee;
 
   return Object.values(valuesCSR).reduce((a, b) => a + b, 0);
@@ -255,6 +259,8 @@ let valuesCSP = {
   diningSpend: 0,
   nonBonusSpend: 0,
   loungeSpend: 0,
+  GE_TSA: 0,
+  doordashSpend: 0,
   annualFee: 0
 };
 
@@ -262,7 +268,9 @@ export function calculateCSP({
   travelSpend,
   diningSpend,
   nonBonusSpend,
-  loungeSpend = 0
+  loungeSpend = 0,
+  GE_TSA = 0,
+  doordashSpend = 0
 }) {
   valuesCSP.signupBonus = CSP.signupBonus;
 

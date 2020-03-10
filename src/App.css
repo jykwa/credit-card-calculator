@@ -8,12 +8,13 @@ header {
   align-items: center;
 }
 
-.container {
-  width: 50% !important;
-}
-
 input {
   margin-left: 5px !important;
+  width: 15%;
+}
+
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
 .edges {

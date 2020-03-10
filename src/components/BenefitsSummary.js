@@ -20,7 +20,7 @@ function benefitsSummary(benefits, valuesCSR, valuesCSP, values) {
           {Object.keys(benefits).map((benefit, index) => (
             <tr key={index}>
               <td>{benefits[benefit].question}</td>
-              <td>${valuesCSR[benefit]}</td>
+              <td>${valuesCSR[benefit] || 0}</td>
               <td>${valuesCSP[benefit]}</td>
             </tr>
           ))}
